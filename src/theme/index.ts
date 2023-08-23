@@ -13,7 +13,7 @@ export const basicTheme = createTheme({
       white: "#FFFFFF",
       black: "#000000",
       gray: "#797979",
-      grayLight: "#797979",
+      grayLight: "#F5F5F5",
       green: "#5AC482",
       greenLight: "#5BC782",
       orange: "#FFB800",
