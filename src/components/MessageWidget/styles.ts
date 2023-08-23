@@ -5,7 +5,7 @@ export const styles: SxStyles = {
   root: {
     width: "100vw",
     height: "100vh",
-    bgcolor: "custom.gray",
+    bgcolor: "custom.grayLight",
     position: "fixed",
     top: 0,
     [basicTheme.breakpoints.up("tablet")]: {
