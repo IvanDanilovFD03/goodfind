@@ -10,10 +10,11 @@ export const styles: SxStyles = {
     top: 0,
     [basicTheme.breakpoints.up("tablet")]: {
       width: 540,
-      height: 584,
+      height: 644,
       top: "unset",
-      bottom: 100,
+      bottom: 160,
       right: 40,
+      boxShadow: "20px 0px 16px 0px rgba(0, 0, 0, 0.25)",
     },
   },
 };
