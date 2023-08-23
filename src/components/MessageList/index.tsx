@@ -18,7 +18,7 @@ export const MessageList: FC<MessageListProps> = ({ messages }) => {
     <List sx={styles.root}>
       {messages.map((message) => (
         <ListItem sx={styles.listItem}>
-          <Message author={message.author} text={message.text} />
+          <Message content={message} />
         </ListItem>
       ))}
     </List>

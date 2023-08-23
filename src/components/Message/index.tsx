@@ -7,13 +7,13 @@ import { Typography } from "../ui/Typography";
 import userImage from "../app/userImage/userImage.png";
 import { MessageIcon } from "../icons/MessageIcon";
 import { SxProps } from "@mui/material";
+import { AIMessage, UserMessage } from "../../types/api";
 
 export interface MessageProps {
-  author: "user" | "ai";
-  text: string;
+  content: UserMessage | AIMessage;
 }
 
-export const Message: FC<MessageProps> = ({ author, text }) => {
+export const Message: FC<MessageProps> = ({ content }) => {
   const messageStyle = (author: "user" | "ai"): SxProps =>
     author === "user"
       ? ({
@@ -37,25 +37,25 @@ export const Message: FC<MessageProps> = ({ author, text }) => {
 
   return (
     <Box sx={styles.root}>
-      {author === "user" ? (
-        <Box sx={messageStyle(author)}>
+      {content.author === "user" ? (
+        <Box sx={messageStyle(content.author)}>
           <Avatar
             alt="user image"
             variant="square"
             src={userImage}
-            sx={iconStyle(author)}
+            sx={iconStyle(content.author)}
           />
           <Typography variant="textMessage" sx={styles.userText}>
-            {text}
+            {content.text}
           </Typography>
         </Box>
       ) : (
-        <Box sx={messageStyle(author)}>
-          <Avatar alt="ai image" variant="square" sx={iconStyle(author)}>
+        <Box sx={messageStyle(content.author)}>
+          <Avatar alt="ai image" variant="square" sx={iconStyle(content.author)}>
             <MessageIcon size="md" />
           </Avatar>
           <Typography variant="textMessage" sx={styles.userText}>
-            {text}
+            {content.text}
           </Typography>
         </Box>
       )}
