@@ -5,10 +5,14 @@ import { Box } from "../../components/ui/Box";
 import { Typography } from "../../components/ui/Typography";
 import { MessageWidget } from "../../components/MessageWidget";
 import { RequestPanel } from "../../components/RequestPanel";
+import { UserMessage } from "../../types/api";
+import { AIMessage } from "../../types/api";
 
-interface MainPageViewProps {}
+interface MainPageViewProps {
+  messages: Array<UserMessage | AIMessage>;
+}
 
-export const MainPageView: FC<MainPageViewProps> = ({}) => {
+export const MainPageView: FC<MainPageViewProps> = ({ messages }) => {
   const [messageWidgetOpen, setMessageWidgetOpen] = useState(true); //change it on false when everything will be ready
   return (
     <Box sx={styles.root}>
@@ -17,6 +21,7 @@ export const MainPageView: FC<MainPageViewProps> = ({}) => {
           widgetTitle="HOMEGROWN CHAT"
           messageWidgetOpen={messageWidgetOpen}
           setMessageWidgetOpen={setMessageWidgetOpen}
+          messages={messages}
         />
       )}
       <RequestPanel />
