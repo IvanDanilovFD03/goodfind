@@ -11,6 +11,7 @@ export const styles: SxStyles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    boxShadow: "20px 0px 16px 0px rgba(0, 0, 0, 0.25)",
     [basicTheme.breakpoints.up("tablet")]: {
       width: 540,
       bottom: 100,
