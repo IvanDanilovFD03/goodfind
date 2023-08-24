@@ -44,11 +44,13 @@ declare module "@mui/material/styles" {
     textInfo: React.CSSProperties;
     textSmall: React.CSSProperties;
     textMessage: React.CSSProperties;
+    textInfoBold: React.CSSProperties;
   }
   interface TypographyVariantsOptions {
     textInfo?: React.CSSProperties;
     textSmall?: React.CSSProperties;
     textMessage?: React.CSSProperties;
+    textInfoBold?: React.CSSProperties;
   }
 }
 
@@ -58,5 +60,6 @@ declare module "@mui/material/Typography" {
     textInfo: true;
     textSmall: true;
     textMessage: true;
+    textInfoBold: true;
   }
 }

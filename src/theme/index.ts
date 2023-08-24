@@ -58,6 +58,11 @@ export const basicTheme = createTheme({
       fontWeight: 400,
       fontSize: "12px",
     },
+    textInfoBold: {
+      fontFamily: PoppinsFontFamily,
+      fontWeight: 700,
+      fontSize: "12px",
+    },
     textSmall: {
       fontFamily: InterFontFamily,
       fontWeight: 400,
@@ -86,6 +91,7 @@ export const theme = createTheme(
             textInfo: "p",
             textSmall: "p",
             textMessage: "p",
+            textInfoBold: "p",
           },
         },
       },
