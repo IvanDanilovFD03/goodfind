@@ -10,7 +10,7 @@ export const styles: SxStyles = {
     top: 0,
     [basicTheme.breakpoints.up("tablet")]: {
       width: 540,
-      height: 644,
+      height: "70vh",
       top: "unset",
       bottom: 160,
       right: 40,
