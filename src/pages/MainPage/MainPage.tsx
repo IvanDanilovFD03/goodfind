@@ -67,21 +67,21 @@ const DUMMY_DATA: {
             {
               id: 344,
               title: "HiHo Cherry-O",
-              image: null,
+              image: "https://i.imgur.com/KgsPahz.png",
               short_description:
                 "HiHo Cherry-O Product Description Check out this new version of the family favorite HiHo Cherry-O ga...",
             },
             {
               id: 434,
               title: "Mediterranean Tthermos 350ML",
-              image: null,
+              image: "https://i.imgur.com/KgsPahz.png",
               short_description:
                 "Mediterranean Tthermos 350ML Themed thermos for liquids, 350 ml With a pleasant soft, rubbery feel,...",
             },
             {
               id: 499,
               title: "Mini bricks Construction Set Western Wall, 630 pcs",
-              image: null,
+              image: "https://i.imgur.com/KgsPahz.png",
               short_description:
                 "Mini bricks Construction Set Western Wall, 630 pcs Build the real model with our ceramic building br...",
             },
