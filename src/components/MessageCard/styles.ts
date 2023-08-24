@@ -39,4 +39,9 @@ export const styles: SxStyles = {
     left: -9,
     borderRadius: "50%",
   },
+  img: {
+    width: 100,
+    height: 100,
+    borderRadius: 4,
+  },
 };
