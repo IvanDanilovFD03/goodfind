@@ -5,11 +5,10 @@ import { Box } from "../../components/ui/Box";
 import { Typography } from "../../components/ui/Typography";
 import { MessageWidget } from "../../components/MessageWidget";
 import { RequestPanel } from "../../components/RequestPanel";
-import { UserMessage } from "../../types/api";
-import { AIMessage } from "../../types/api";
+import { Message } from "../../types/api";
 
 interface MainPageViewProps {
-  messages: Array<UserMessage | AIMessage>;
+  messages: Message[];
 }
 
 export const MainPageView: FC<MainPageViewProps> = ({ messages }) => {
