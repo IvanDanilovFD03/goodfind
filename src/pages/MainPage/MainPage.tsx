@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 
 import { MainPageView } from "../MainPageView/MainPageView";
 import { Message } from "../../types/api";
@@ -100,8 +100,54 @@ const MainPage: FC = () => {
   const { data } = DUMMY_DATA;
   const { messages } = data;
   const { items } = messages;
+  const [enteredTextMessage, setEnteredTextMessage] = useState("");
+  const [activeSendRequest, setActiveSendRequest] = useState(false);
 
-  return <MainPageView messages={items} />;
+  const authorizationToken = "3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw";
+  const websiteId = 9;
+
+  const sendRequest = useCallback(async () => {
+    // setIsLoading(true);
+    if (enteredTextMessage !== "") {
+      try {
+        const response = await fetch(
+          `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authorizationToken}`,
+            },
+            body: JSON.stringify({
+              session_token: "fghfghfhgfghfgh",
+              content: enteredTextMessage,
+            }),
+          }
+        );
+        setActiveSendRequest(false);
+        if (!response.ok) {
+          throw new Error("Something went wrong!");
+        }
+        const responseData = await response.json();
+        console.log(responseData);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [enteredTextMessage]);
+
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+
+  return (
+    <MainPageView
+      messages={items}
+      setEnteredTextMessage={setEnteredTextMessage}
+      activeSendRequest={activeSendRequest}
+      setActiveSendRequest={setActiveSendRequest}
+    />
+  );
 };
 
 export default MainPage;
