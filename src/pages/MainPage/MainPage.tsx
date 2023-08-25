@@ -103,8 +103,10 @@ const MainPage: FC = () => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
 
-  const authorizationToken = "3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw";
-  const websiteId = 9;
+  // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
+  const windowLink = new URL(window.location.href);
+  const authorizationToken = windowLink.searchParams.get("authorization_token");
+  const websiteId = windowLink.searchParams.get("website_id");
 
   const sendRequest = useCallback(async () => {
     // setIsLoading(true);
@@ -134,7 +136,7 @@ const MainPage: FC = () => {
         console.log(error);
       }
     }
-  }, [enteredTextMessage]);
+  }, [enteredTextMessage, authorizationToken, websiteId]);
 
   useEffect(() => {
     sendRequest();
