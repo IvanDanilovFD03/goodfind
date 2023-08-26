@@ -45,9 +45,9 @@ export const styles: SxStyles = {
     borderRadius: 4,
   },
   loadingAnswer: {
-    width: 4,
+    width: 7,
     height: 8,
-    bgcolor: "custom.gray",
+    bgcolor: "custom.black",
     animation: "blinker 1s linear infinite",
     "@keyframes blinker": {
       "50% ": {
