@@ -14,4 +14,4 @@ export interface SvgIconProps extends SvgIconPropsMui {
   size?: IconSize;
 }
 
-export type IconSize = "sm" | "md";
+export type IconSize = "sm" | "md" | "lg";

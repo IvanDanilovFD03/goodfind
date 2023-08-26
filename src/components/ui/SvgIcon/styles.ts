@@ -13,4 +13,10 @@ export const styles: SxStyles = {
       height: '24px',
     },
   },
+  large: {
+    '&': {
+      width: '40px',
+      height: '40px',
+    },
+  },
 };
