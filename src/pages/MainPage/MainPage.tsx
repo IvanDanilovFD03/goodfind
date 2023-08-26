@@ -102,6 +102,7 @@ const MainPage: FC = () => {
   const { items } = messages;
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
+  const [messageHistory, setMessageHistory] = useState<Message[]>([]);
 
   // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
   const windowLink = new URL(window.location.href);
@@ -142,9 +143,39 @@ const MainPage: FC = () => {
     sendRequest();
   }, [sendRequest]);
 
+  const getHistory = useCallback(async () => {
+    // setIsLoading(true);
+    try {
+      const response = await fetch(
+        `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search/history?session_token=gdfgdfgdg`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authorizationToken}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const responseData = await response.json();
+      console.log(responseData);
+      setMessageHistory(responseData.data.messages.items);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [authorizationToken, websiteId]);
+
+  // for GET request for history
+  useEffect(() => {
+    console.log("load");
+    getHistory();
+  }, [getHistory]);
+
   return (
     <MainPageView
-      messages={items}
+      messages={messageHistory}
       setEnteredTextMessage={setEnteredTextMessage}
       activeSendRequest={activeSendRequest}
       setActiveSendRequest={setActiveSendRequest}
