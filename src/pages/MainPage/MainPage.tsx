@@ -48,6 +48,13 @@ const MainPage: FC = () => {
         );
 
         if (!response.ok) {
+          setLoadingAnswer(false);
+          messageHistory.splice(0, 1);
+          messageHistory.unshift({
+            role: 2,
+            content: "Ooops...Something went wrong!",
+          });
+          setActiveSendRequest(false);
           throw new Error("Something went wrong!");
         }
         const responseInfo = await response.json();
@@ -56,7 +63,13 @@ const MainPage: FC = () => {
         setLoadingAnswer(false);
         messageHistory.splice(1, 1);
       } catch (error) {
-        console.log(error);
+        setLoadingAnswer(false);
+        messageHistory.splice(0, 1);
+        messageHistory.unshift({
+          role: 2,
+          content: "Ooops...Something went wrong!",
+        });
+        setActiveSendRequest(false);
       }
     }
   }, [enteredTextMessage, authorizationToken, websiteId, messageHistory]);
@@ -94,7 +107,6 @@ const MainPage: FC = () => {
     }
   }, [authorizationToken, websiteId]);
 
-  // for GET request for history
   useEffect(() => {
     getHistory();
   }, [getHistory]);
