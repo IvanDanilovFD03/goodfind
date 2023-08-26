@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 
 import { styles } from "./styles";
 import { Box } from "../../components/ui/Box";
@@ -19,13 +19,22 @@ export const MainPageView: FC<MainPageViewProps> = ({
   activeSendRequest,
   setActiveSendRequest,
 }) => {
-  const [messageWidgetOpen, setMessageWidgetOpen] = useState(true); //change it on false when everything will be ready
+  const [messageWidgetOpen, setMessageWidgetOpen] = useState(false);
+  useEffect(() => {
+    if (messageWidgetOpen && document.getElementById("messagesList")) {
+      const element = document.getElementById("messagesList");
+      element &&
+        element.scrollTo({
+          top: element.scrollHeight,
+        });
+    }
+  }, [messageWidgetOpen]);
+
   return (
     <Box sx={styles.root}>
       {messageWidgetOpen && (
         <MessageWidget
           widgetTitle="HOMEGROWN CHAT"
-          messageWidgetOpen={messageWidgetOpen}
           setMessageWidgetOpen={setMessageWidgetOpen}
           messages={messages}
         />
@@ -34,6 +43,8 @@ export const MainPageView: FC<MainPageViewProps> = ({
         setEnteredTextMessage={setEnteredTextMessage}
         activeSendRequest={activeSendRequest}
         setActiveSendRequest={setActiveSendRequest}
+        messageWidgetOpen={messageWidgetOpen}
+        setMessageWidgetOpen={setMessageWidgetOpen}
       />
     </Box>
   );

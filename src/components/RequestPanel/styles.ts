@@ -62,4 +62,35 @@ export const styles: SxStyles = {
     top: -350,
     right: 60,
   },
+  rootClose: {
+    bgcolor: "custom.black",
+    height: 60,
+    width: 155,
+    position: "absolute",
+    bottom: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+    p: "10px",
+    columnGap: 2,
+    borderRadius: 0,
+    "&:hover": {
+      bgcolor: "custom.black",
+    },
+    [basicTheme.breakpoints.up("tablet")]: {
+      bottom: 100,
+      right: 40,
+    },
+  },
+  logoIcon: {
+    bgcolor: "custom.green",
+    p: "8.533px",
+  },
+  logoText: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    rowGap: 1,
+  },
 };
