@@ -5,11 +5,11 @@ import { Message } from "../../types/api";
 import { v4 as uuidv4 } from "uuid";
 import Cookies from "js-cookie";
 
-
 const MainPage: FC = () => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
+  const [loadingAnswer, setLoadingAnswer] = useState(false);
 
   // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
   const windowLink = new URL(window.location.href);
@@ -27,8 +27,10 @@ const MainPage: FC = () => {
   };
 
   const sendRequest = useCallback(async () => {
-    // setIsLoading(true);
     if (enteredTextMessage !== "") {
+      messageHistory.unshift({ role: 1, content: enteredTextMessage });
+      setLoadingAnswer(true);
+      messageHistory.unshift({ role: 2, content: "loadingAnswer" });
       try {
         const response = await fetch(
           `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search`,
@@ -44,24 +46,33 @@ const MainPage: FC = () => {
             }),
           }
         );
-        setActiveSendRequest(false);
+
         if (!response.ok) {
           throw new Error("Something went wrong!");
         }
-        const responseData = await response.json();
-        console.log(responseData);
+        const responseInfo = await response.json();
+        messageHistory.unshift(responseInfo.data);
+        setActiveSendRequest(false);
+        setLoadingAnswer(false);
+        messageHistory.splice(1, 1);
       } catch (error) {
         console.log(error);
       }
     }
-  }, [enteredTextMessage, authorizationToken, websiteId]);
+  }, [enteredTextMessage, authorizationToken, websiteId, messageHistory]);
 
   useEffect(() => {
     sendRequest();
-  }, [sendRequest]);
+    if (document.getElementById("messagesList")) {
+      const element = document.getElementById("messagesList");
+      element &&
+        element.scrollTo({
+          top: element.scrollHeight,
+        });
+    }
+  }, [sendRequest, loadingAnswer, messageHistory]);
 
   const getHistory = useCallback(async () => {
-    // setIsLoading(true);
     try {
       const response = await fetch(
         `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search/history?session_token=${createSessionToken()}`,
@@ -77,7 +88,6 @@ const MainPage: FC = () => {
         throw new Error("Something went wrong!");
       }
       const responseData = await response.json();
-      console.log(responseData);
       setMessageHistory(responseData.data.messages.items);
     } catch (error) {
       console.log(error);
@@ -86,7 +96,6 @@ const MainPage: FC = () => {
 
   // for GET request for history
   useEffect(() => {
-    console.log("load");
     getHistory();
   }, [getHistory]);
 

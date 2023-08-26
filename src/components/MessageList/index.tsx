@@ -1,8 +1,7 @@
-import { FC, useState } from "react";
-import { useBreakpoints } from "../../hooks/useBreakpoints";
-import { Box } from "../ui/Box";
+import { FC, ReactNode } from "react";
 import { List } from "../ui/List";
 import { ListItem } from "../ui/ListItem";
+import { v4 as uuidv4 } from "uuid";
 
 import { styles } from "./styles";
 import { Message } from "../Message";
@@ -13,18 +12,31 @@ export interface MessageListProps {
 }
 
 export const MessageList: FC<MessageListProps> = ({ messages }) => {
+  const addListItem = () => {
+    const listItems: ReactNode[] = [];
+    messages.map((message) =>
+      listItems.push(<Message messageContent={message} />)
+    );
+    return listItems.reverse();
+  };
+
+  const messagesList = addListItem();
+
+  if (document.getElementById("messagesList")) {
+    const element = document.getElementById("messagesList");
+    element &&
+      element.scrollTo({
+        top: element.scrollHeight,
+      });
+  }
+
   return (
-    <List sx={styles.root}>
-      {messages
-        .map((message) => (
-          <ListItem
-            sx={styles.listItem}
-            key={`${message.role + message.content + Math.random()}`}
-          >
-            <Message messageContent={message} />
-          </ListItem>
-        ))
-        .reverse()}
+    <List sx={styles.root} id="messagesList">
+      {messagesList.map((message) => (
+        <ListItem sx={styles.listItem} key={`${uuidv4()}`}>
+          {message}
+        </ListItem>
+      ))}
     </List>
   );
 };

@@ -44,4 +44,15 @@ export const styles: SxStyles = {
     height: 100,
     borderRadius: 4,
   },
+  loadingAnswer: {
+    width: 4,
+    height: 8,
+    bgcolor: "custom.gray",
+    animation: "blinker 1s linear infinite",
+    "@keyframes blinker": {
+      "50% ": {
+        opacity: 0,
+      },
+    },
+  },
 };

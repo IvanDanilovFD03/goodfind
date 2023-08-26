@@ -1,5 +1,4 @@
-import { FC, useState } from "react";
-import { useBreakpoints } from "../../hooks/useBreakpoints";
+import { FC } from "react";
 import { Box } from "../ui/Box";
 import { Card } from "../ui/Card";
 import { CardActions } from "../ui/CardActions";
@@ -24,8 +23,13 @@ export interface MessageCardProps {
 export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
   return (
     <Card sx={styles.root}>
+      {text === "loadingAnswer" && <Box sx={styles.loadingAnswer}></Box>}
       <CardContent sx={styles.cardContent}>
-        <Typography variant="textMessage">{text}</Typography>
+        {text === "loadingAnswer" ? (
+          <Box sx={styles.loadingAnswer}></Box>
+        ) : (
+          <Typography variant="textMessage">{text}</Typography>
+        )}
         {products && (
           <Box sx={styles.listContainer}>
             <Typography variant="textMessage">
@@ -34,7 +38,7 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
             <List sx={styles.list} style={{ listStyleType: "disc" }}>
               {products.map(({ id, title, image, short_description }) => (
                 <ListItem key={id} sx={styles.listItem}>
-                  <Box  sx={styles.listItemTitleContainer}>
+                  <Box sx={styles.listItemTitleContainer}>
                     <Box sx={styles.listItemCircle}></Box>
                     <Typography variant="textMessage" sx={styles.listItemTitle}>
                       {title}

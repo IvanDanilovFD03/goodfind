@@ -6,7 +6,7 @@ export const styles: SxStyles = {
     width: "100%",
     p: 0,
     height: "calc(100vh - 44px - 100px)",
-    overflowY: "scroll",
+    overflowY: "auto",
     "::-webkit-scrollbar": {
       width: 6,
     },
