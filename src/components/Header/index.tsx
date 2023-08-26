@@ -1,5 +1,4 @@
-import { FC, useState } from "react";
-import { useBreakpoints } from "../../hooks/useBreakpoints";
+import { FC } from "react";
 import { Box } from "../ui/Box";
 import { Typography } from "../ui/Typography";
 

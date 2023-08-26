@@ -10,7 +10,7 @@ const MainPage: FC = () => {
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
   const [loadingAnswer, setLoadingAnswer] = useState(false);
-
+  
   // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
   const windowLink = new URL(window.location.href);
   const authorizationToken = windowLink.searchParams.get("authorization_token");

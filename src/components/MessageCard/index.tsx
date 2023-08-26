@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Box } from "../ui/Box";
 import { Card } from "../ui/Card";
-import { CardActions } from "../ui/CardActions";
 import { CardContent } from "../ui/CardContent";
 import { CardMedia } from "../ui/CardMedia";
 import { List } from "../ui/List";
