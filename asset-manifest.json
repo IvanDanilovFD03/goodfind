@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/goodfind/static/css/main.1bf6a73a.css",
+    "main.js": "/goodfind/static/js/main.c6617301.js",
+    "static/js/787.9562fab4.chunk.js": "/goodfind/static/js/787.9562fab4.chunk.js",
+    "static/media/Druk-Wide-Bold.woff2": "/goodfind/static/media/Druk-Wide-Bold.2f0bcfa03e7daa9ee731.woff2",
+    "index.html": "/goodfind/index.html",
+    "main.1bf6a73a.css.map": "/goodfind/static/css/main.1bf6a73a.css.map",
+    "main.c6617301.js.map": "/goodfind/static/js/main.c6617301.js.map",
+    "787.9562fab4.chunk.js.map": "/goodfind/static/js/787.9562fab4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1bf6a73a.css",
+    "static/js/main.c6617301.js"
+  ]
+}
