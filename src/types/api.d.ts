@@ -6,5 +6,9 @@ export type Message = {
     title: string;
     image: string | null;
     short_description: string;
+    meta: {
+      price: string;
+      product_url: string;
+    }
   }[];
 };
