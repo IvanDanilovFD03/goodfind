@@ -1,13 +1,15 @@
 import { FC } from "react";
+
 import { Box } from "../ui/Box";
 import { Card } from "../ui/Card";
 import { CardContent } from "../ui/CardContent";
 import { CardMedia } from "../ui/CardMedia";
 import { List } from "../ui/List";
 import { ListItem } from "../ui/ListItem";
+import { MessageCardTitle } from "../MessageCardTitle";
+import { Typography } from "../ui/Typography";
 
 import { styles } from "./styles";
-import { Typography } from "../ui/Typography";
 
 export interface MessageCardProps {
   text: string;
@@ -16,6 +18,10 @@ export interface MessageCardProps {
     title: string;
     image: string | null;
     short_description: string;
+    meta: {
+      price: string;
+      product_url: string;
+    };
   }[];
 }
 
@@ -34,14 +40,16 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
             <Typography variant="textMessage">
               So here is the recommended shopping list for you:
             </Typography>
-            <List sx={styles.list} style={{ listStyleType: "disc" }}>
-              {products.map(({ id, title, image, short_description }) => (
+            <List sx={styles.list}>
+              {products.map(({ id, title, image, short_description, meta }) => (
                 <ListItem key={id} sx={styles.listItem}>
                   <Box sx={styles.listItemTitleContainer}>
                     <Box sx={styles.listItemCircle}></Box>
-                    <Typography variant="textMessage" sx={styles.listItemTitle}>
-                      {title}
-                    </Typography>
+                    <MessageCardTitle
+                      text={title}
+                      product_url={meta.product_url}
+                      price={meta.price}
+                    />
                   </Box>
                   <Typography variant="textMessage">
                     {short_description}
