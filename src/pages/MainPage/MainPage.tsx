@@ -9,8 +9,7 @@ const MainPage: FC = () => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
-  const [loadingAnswer, setLoadingAnswer] = useState(false);
-  
+
   // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
   const windowLink = new URL(window.location.href);
   const authorizationToken = windowLink.searchParams.get("authorization_token");
@@ -26,56 +25,7 @@ const MainPage: FC = () => {
     return token;
   };
 
-  const sendRequest = useCallback(async () => {
-    if (enteredTextMessage !== "") {
-      messageHistory.unshift({ role: 1, content: enteredTextMessage });
-      setLoadingAnswer(true);
-      messageHistory.unshift({ role: 2, content: "loadingAnswer" });
-      try {
-        const response = await fetch(
-          `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${authorizationToken}`,
-            },
-            body: JSON.stringify({
-              session_token: createSessionToken(),
-              content: enteredTextMessage,
-            }),
-          }
-        );
-
-        if (!response.ok) {
-          setLoadingAnswer(false);
-          messageHistory.splice(0, 1);
-          messageHistory.unshift({
-            role: 2,
-            content: "Ooops...Something went wrong!",
-          });
-          setActiveSendRequest(false);
-          throw new Error("Something went wrong!");
-        }
-        const responseInfo = await response.json();
-        messageHistory.unshift(responseInfo.data);
-        setActiveSendRequest(false);
-        setLoadingAnswer(false);
-        messageHistory.splice(1, 1);
-      } catch (error) {
-        setLoadingAnswer(false);
-        messageHistory.splice(0, 1);
-        messageHistory.unshift({
-          role: 2,
-          content: "Ooops...Something went wrong!",
-        });
-        setActiveSendRequest(false);
-      }
-    }
-  }, [enteredTextMessage, authorizationToken, websiteId, messageHistory]);
-
-  useEffect(() => {
-    sendRequest();
+  const scrollMessageList = () => {
     if (document.getElementById("messagesList")) {
       const element = document.getElementById("messagesList");
       element &&
@@ -83,7 +33,56 @@ const MainPage: FC = () => {
           top: element.scrollHeight,
         });
     }
-  }, [sendRequest, loadingAnswer, messageHistory]);
+  };
+
+  const sendRequest = useCallback(async () => {
+    messageHistory.unshift({ role: 1, content: enteredTextMessage });
+    messageHistory.unshift({ role: 2, content: "loadingAnswer" });
+    try {
+      const response = await fetch(
+        `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authorizationToken}`,
+          },
+          body: JSON.stringify({
+            session_token: createSessionToken(),
+            content: enteredTextMessage,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        messageHistory.splice(0, 1);
+        messageHistory.unshift({
+          role: 2,
+          content: "Ooops...Something went wrong!",
+        });
+        setActiveSendRequest(false);
+        throw new Error("Something went wrong!");
+      }
+      const responseInfo = await response.json();
+      messageHistory.unshift(responseInfo.data);
+      setActiveSendRequest(false);
+      messageHistory.splice(1, 1);
+    } catch (error) {
+      messageHistory.splice(0, 1);
+      messageHistory.unshift({
+        role: 2,
+        content: "Ooops...Something went wrong!",
+      });
+      setActiveSendRequest(false);
+    }
+  }, [enteredTextMessage, authorizationToken, websiteId, messageHistory]);
+
+  useEffect(() => {
+    if (enteredTextMessage !== "") {
+      sendRequest();
+    }
+    scrollMessageList()
+  }, [sendRequest, enteredTextMessage]);
 
   const getHistory = useCallback(async () => {
     try {
