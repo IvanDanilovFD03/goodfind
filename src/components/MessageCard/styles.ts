@@ -15,14 +15,22 @@ export const styles: SxStyles = {
       pb: "0",
     },
   },
+  listContainer: {
+    mt: 1,
+  },
   list: {
+    mt: 1,
     p: 0,
+    display: "flex",
+    flexDirection: "column",
+    rowGap: 3,
   },
   listItem: {
     p: 0,
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
+    rowGap: 1,
   },
   listItemTitle: {
     textDecoration: "underline",
