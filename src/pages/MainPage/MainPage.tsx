@@ -9,6 +9,7 @@ const MainPage: FC = () => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
+  const [greeting, setGreeting] = useState("");
 
   // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
   const windowLink = new URL(window.location.href);
@@ -81,7 +82,7 @@ const MainPage: FC = () => {
     if (enteredTextMessage !== "") {
       sendRequest();
     }
-    scrollMessageList()
+    scrollMessageList();
   }, [sendRequest, enteredTextMessage]);
 
   const getHistory = useCallback(async () => {
@@ -106,9 +107,36 @@ const MainPage: FC = () => {
     }
   }, [authorizationToken, websiteId]);
 
+  const getGreeting = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search/greeting`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authorizationToken}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const responseData = await response.json();
+      setGreeting(responseData.data.greeting);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [authorizationToken, websiteId]);
+
   useEffect(() => {
     getHistory();
-  }, [getHistory]);
+    getGreeting();
+  }, [getHistory, getGreeting]);
+
+  useEffect(() => {
+    messageHistory.push({ role: 2, content: greeting });
+  }, [messageHistory, greeting]);
 
   return (
     <MainPageView
