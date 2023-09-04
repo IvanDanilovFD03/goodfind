@@ -13,6 +13,7 @@ import { styles } from "./styles";
 import { SendIcon } from "../icons/SendIcon";
 import { EmojiIcon } from "../icons/EmojiIcon";
 import { MessageIcon } from "../icons/MessageIcon";
+import { GreetingWindow } from "../GreetingWindow";
 
 export interface RequestPanelProps {
   setEnteredTextMessage: (value: React.SetStateAction<string>) => void;
@@ -20,6 +21,7 @@ export interface RequestPanelProps {
   setActiveSendRequest: (value: React.SetStateAction<boolean>) => void;
   messageWidgetOpen: boolean;
   setMessageWidgetOpen: (value: React.SetStateAction<boolean>) => void;
+  greeting: string;
 }
 
 export const RequestPanel: FC<RequestPanelProps> = ({
@@ -28,9 +30,12 @@ export const RequestPanel: FC<RequestPanelProps> = ({
   setActiveSendRequest,
   messageWidgetOpen,
   setMessageWidgetOpen,
+  greeting,
 }) => {
   const [emojiPickerActive, setEmojiPickerActive] = useState(false);
   const [textMessage, setTextMessage] = useState("");
+  const [greetingWindow, setGreetingWindow] = useState(false);
+  const [counter, setCounter] = useState(6);
 
   const emojiPickHandler = useCallback(
     (emojiData: EmojiClickData) => {
@@ -39,10 +44,25 @@ export const RequestPanel: FC<RequestPanelProps> = ({
     [textMessage]
   );
 
+  useEffect(() => {
+    if (!messageWidgetOpen && counter !== 0) {
+      counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    }
+    if (messageWidgetOpen) {
+      setGreetingWindow(false);
+      setCounter(6);
+    }
+    if (counter === 0) {
+      setGreetingWindow(true);
+    }
+  }, [messageWidgetOpen, counter]);
+
   const textEnterHandler = (
     event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     if (event.key === "Enter") {
+      setGreetingWindow(false);
+      setMessageWidgetOpen(true);
       setEnteredTextMessage(textMessage);
       setActiveSendRequest(true);
       setTextMessage("");
@@ -62,8 +82,13 @@ export const RequestPanel: FC<RequestPanelProps> = ({
 
   return (
     <Box>
-      {messageWidgetOpen ? (
+      {messageWidgetOpen || greetingWindow ? (
         <Box sx={styles.root}>
+          {greetingWindow && (
+            <Box sx={styles.greetingMessage}>
+              <GreetingWindow greeting={greeting} />
+            </Box>
+          )}
           <Box sx={styles.input}>
             <Input
               sx={styles.inputBase}
@@ -94,6 +119,8 @@ export const RequestPanel: FC<RequestPanelProps> = ({
           <IconButton
             sx={activeButtonStyles(activeSendRequest)}
             onClick={() => {
+              setGreetingWindow(false);
+              setMessageWidgetOpen(true);
               setEnteredTextMessage(textMessage);
               setActiveSendRequest(true);
               setTextMessage("");

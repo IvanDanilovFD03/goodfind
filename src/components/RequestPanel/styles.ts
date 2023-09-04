@@ -93,4 +93,10 @@ export const styles: SxStyles = {
     alignItems: "start",
     rowGap: 1,
   },
+  greetingMessage: {
+    position: "absolute",
+    width: "100%",
+    top: -109,
+    right: 0
+  },
 };
