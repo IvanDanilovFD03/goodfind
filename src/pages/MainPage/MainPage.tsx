@@ -10,7 +10,7 @@ interface MainPageProps {
   websiteId: string;
 }
 
-const MainPage: FC<MainPageProps> = ({authorizationToken, websiteId}) => {
+const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
@@ -21,15 +21,34 @@ const MainPage: FC<MainPageProps> = ({authorizationToken, websiteId}) => {
   // const authorizationToken = windowLink.searchParams.get("authorization_token");
   // const websiteId = windowLink.searchParams.get("website_id");
 
-  const createSessionToken = () => {
-    if (Cookies.get("session_token")) {
-      const token = Cookies.get("session_token");
-      return token;
+  const createSessionToken = useCallback(() => {
+    const getCookies = Cookies.get("session_token");
+    if (getCookies) {
+      const tokensArray = getCookies.split("|");
+      const tokenFromCookies =
+        tokensArray.length !== 0 &&
+        tokensArray.find((element) => {
+          const matchResult = element.match(/website_id:(\d+)/);
+          return matchResult && matchResult[1] === websiteId;
+        });
+      if (tokenFromCookies) {
+        return tokenFromCookies;
+      } else {
+        const token = uuidv4();
+        const fullToken = `${token}-website_id:${websiteId}`;
+        Cookies.set("session_token", `${getCookies}|${fullToken}`);
+        return fullToken;
+      }
     }
     const token = uuidv4();
-    Cookies.set("session_token", `${token}`, { expires: 7 });
+    Cookies.set("session_token", `${token}-website_id:${websiteId}`, {
+      expires: 7,
+    });
     return token;
-  };
+  }, [websiteId]);
+
+  console.log("render");
+  
 
   const scrollMessageList = () => {
     if (document.getElementById("messagesList")) {
@@ -81,7 +100,13 @@ const MainPage: FC<MainPageProps> = ({authorizationToken, websiteId}) => {
       });
       setActiveSendRequest(false);
     }
-  }, [enteredTextMessage, authorizationToken, websiteId, messageHistory]);
+  }, [
+    enteredTextMessage,
+    authorizationToken,
+    websiteId,
+    messageHistory,
+    createSessionToken,
+  ]);
 
   useEffect(() => {
     if (enteredTextMessage !== "") {
@@ -110,7 +135,7 @@ const MainPage: FC<MainPageProps> = ({authorizationToken, websiteId}) => {
     } catch (error) {
       console.log(error);
     }
-  }, [authorizationToken, websiteId]);
+  }, [authorizationToken, websiteId, createSessionToken]);
 
   const getGreeting = useCallback(async () => {
     try {
