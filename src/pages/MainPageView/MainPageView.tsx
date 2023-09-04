@@ -11,6 +11,7 @@ interface MainPageViewProps {
   setEnteredTextMessage: (value: React.SetStateAction<string>) => void;
   activeSendRequest: boolean;
   setActiveSendRequest: (value: React.SetStateAction<boolean>) => void;
+  greeting: string;
 }
 
 export const MainPageView: FC<MainPageViewProps> = ({
@@ -18,6 +19,7 @@ export const MainPageView: FC<MainPageViewProps> = ({
   setEnteredTextMessage,
   activeSendRequest,
   setActiveSendRequest,
+  greeting,
 }) => {
   const [messageWidgetOpen, setMessageWidgetOpen] = useState(false);
   useEffect(() => {
@@ -45,6 +47,7 @@ export const MainPageView: FC<MainPageViewProps> = ({
         setActiveSendRequest={setActiveSendRequest}
         messageWidgetOpen={messageWidgetOpen}
         setMessageWidgetOpen={setMessageWidgetOpen}
+        greeting={greeting}
       />
     </Box>
   );

@@ -144,6 +144,7 @@ const MainPage: FC = () => {
       setEnteredTextMessage={setEnteredTextMessage}
       activeSendRequest={activeSendRequest}
       setActiveSendRequest={setActiveSendRequest}
+      greeting={greeting}
     />
   );
 };
