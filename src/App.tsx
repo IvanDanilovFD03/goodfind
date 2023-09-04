@@ -4,12 +4,20 @@ import { theme } from "./theme";
 import { Box } from "./components/ui/Box";
 import MainPage from "./pages/MainPage/MainPage";
 
-const App: FC = () => {
+interface AppProps {
+  authorizationToken: string;
+  websiteId: string;
+}
+
+const App: FC<AppProps> = ({authorizationToken, websiteId}) => {
   return (
     <Box>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <MainPage />
+        <MainPage
+          websiteId={websiteId}
+          authorizationToken={authorizationToken}
+        />
       </ThemeProvider>
     </Box>
   );

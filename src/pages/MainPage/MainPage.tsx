@@ -5,16 +5,21 @@ import { Message } from "../../types/api";
 import { v4 as uuidv4 } from "uuid";
 import Cookies from "js-cookie";
 
-const MainPage: FC = () => {
+interface MainPageProps {
+  authorizationToken: string;
+  websiteId: string;
+}
+
+const MainPage: FC<MainPageProps> = ({authorizationToken, websiteId}) => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
   const [greeting, setGreeting] = useState("");
 
   // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
-  const windowLink = new URL(window.location.href);
-  const authorizationToken = windowLink.searchParams.get("authorization_token");
-  const websiteId = windowLink.searchParams.get("website_id");
+  // const windowLink = new URL(window.location.href);
+  // const authorizationToken = windowLink.searchParams.get("authorization_token");
+  // const websiteId = windowLink.searchParams.get("website_id");
 
   const createSessionToken = () => {
     if (Cookies.get("session_token")) {
