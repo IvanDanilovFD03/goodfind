@@ -47,10 +47,7 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
       expires: 7,
     });
     return token;
-  }, [websiteId]);
-
-  console.log("render");
-  
+  }, [websiteId]);  
 
   const scrollMessageList = () => {
     if (document.getElementById("messagesList")) {
