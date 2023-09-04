@@ -36,7 +36,9 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
       } else {
         const token = uuidv4();
         const fullToken = `${token}-website_id:${websiteId}`;
-        Cookies.set("session_token", `${getCookies}|${fullToken}`);
+        Cookies.set("session_token", `${getCookies}|${fullToken}`, {
+          expires: 7,
+        });
         return fullToken;
       }
     }
