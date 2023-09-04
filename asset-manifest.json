@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/goodfind/static/css/main.1bf6a73a.css",
-    "main.js": "/goodfind/static/js/main.9df83daa.js",
-    "static/media/Druk-Wide-Bold.woff2": "/goodfind/static/media/Druk-Wide-Bold.2f0bcfa03e7daa9ee731.woff2",
+    "main.css": "/goodfind/static/css/main.0bae2c27.css",
+    "main.js": "/goodfind/static/js/main.48f63338.js",
     "index.html": "/goodfind/index.html",
-    "main.1bf6a73a.css.map": "/goodfind/static/css/main.1bf6a73a.css.map",
-    "main.9df83daa.js.map": "/goodfind/static/js/main.9df83daa.js.map"
+    "main.0bae2c27.css.map": "/goodfind/static/css/main.0bae2c27.css.map",
+    "main.48f63338.js.map": "/goodfind/static/js/main.48f63338.js.map"
   },
   "entrypoints": [
-    "static/css/main.1bf6a73a.css",
-    "static/js/main.9df83daa.js"
+    "static/css/main.0bae2c27.css",
+    "static/js/main.48f63338.js"
   ]
 }
