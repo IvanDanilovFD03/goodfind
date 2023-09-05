@@ -4,7 +4,7 @@ import { Typography } from "../ui/Typography";
 
 import { styles } from "./styles";
 import { IconButton } from "../ui/IconButton";
-import { CancelIcon } from "../icons/CancelIcon";
+import { CloseCircleIcon } from "../icons/CloseCircleIcon";
 
 export interface MessageWidgetProps {
   title: string;
@@ -21,7 +21,7 @@ export const Header: FC<MessageWidgetProps> = ({
         {title}
       </Typography>
       <IconButton onClick={() => setMessageWidgetOpen(false)}>
-        <CancelIcon size="md" />
+        <CloseCircleIcon size="md" />
       </IconButton>
     </Box>
   );
