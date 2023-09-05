@@ -86,7 +86,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
         <Box sx={styles.root}>
           {greetingWindow && (
             <Box sx={styles.greetingMessage}>
-              <GreetingWindow greeting={greeting} />
+              <GreetingWindow greeting={greeting} setGreetingWindow={setGreetingWindow}/>
             </Box>
           )}
           <Box sx={styles.input}>

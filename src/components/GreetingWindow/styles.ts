@@ -18,7 +18,9 @@ export const styles: SxStyles = {
     height: 89,
     width: "100%",
     display: "flex",
-    p: 3,
+    py: 3,
+    pl: 3,
+    pr: 6,
     position: "relative",
     mb: 1,
     "&:before": {
@@ -33,7 +35,15 @@ export const styles: SxStyles = {
       borderColor: "transparent transparent #000000 transparent",
     },
   },
-  textMessage: {
-  
+  closeButton: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    width: 16,
+    height: 16,
+  },
+  closeIcon: {
+    fontSize: 16,
+    color: "custom.white"
   },
 };

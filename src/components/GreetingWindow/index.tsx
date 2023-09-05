@@ -2,8 +2,10 @@ import { FC, useRef, useEffect } from "react";
 
 import { Avatar } from "../ui/Avatar";
 import { Box } from "../ui/Box";
+import { IconButton } from "../ui/IconButton";
 import { Typography } from "../ui/Typography";
 
+import { CloseIcon } from "../icons/CloseIcon";
 import { MessageIcon } from "../icons/MessageIcon";
 
 import { styles } from "./styles";
@@ -12,9 +14,13 @@ import Typed from "typed.js";
 
 export interface GreetingWindowProps {
   greeting: string;
+  setGreetingWindow: (value: React.SetStateAction<boolean>) => void;
 }
 
-export const GreetingWindow: FC<GreetingWindowProps> = ({ greeting }) => {
+export const GreetingWindow: FC<GreetingWindowProps> = ({
+  greeting,
+  setGreetingWindow,
+}) => {
   const el = useRef(null);
 
   useEffect(() => {
@@ -22,7 +28,7 @@ export const GreetingWindow: FC<GreetingWindowProps> = ({ greeting }) => {
       strings: [`${greeting}`],
       typeSpeed: 50,
       showCursor: true,
-      cursorChar: '|',
+      cursorChar: "|",
       autoInsertCss: true,
     });
 
@@ -44,6 +50,12 @@ export const GreetingWindow: FC<GreetingWindowProps> = ({ greeting }) => {
           ref={el}
         ></Typography>
       </Box>
+      <IconButton
+        sx={styles.closeButton}
+        onClick={() => setGreetingWindow(false)}
+      >
+        <CloseIcon sx={styles.closeIcon} />
+      </IconButton>
     </Box>
   );
 };
