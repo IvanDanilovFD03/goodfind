@@ -3,6 +3,7 @@ import { basicTheme } from "../../theme";
 
 export const styles: SxStyles = {
   root: {
+    zIndex: 10000,
     bgcolor: "custom.black",
     height: 60,
     width: "100vw",

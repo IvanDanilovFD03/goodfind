@@ -8,6 +8,7 @@ export const styles: SxStyles = {
     bgcolor: "custom.grayLight",
     position: "fixed",
     top: 0,
+    zIndex: 10000,
     [basicTheme.breakpoints.up("tablet")]: {
       width: 540,
       height: "70vh",
