@@ -1,19 +1,21 @@
 import { FC, useCallback, useEffect, useState } from "react";
+
 import { Box } from "../ui/Box";
-import { Input } from "../ui/Input";
-import EmojiPicker from "emoji-picker-react";
-import { EmojiClickData } from "emoji-picker-react";
-
-import { IconButton } from "../ui/IconButton";
-import { Typography } from "../ui/Typography";
 import { Button } from "../ui/Button";
-import { SxProps } from "@mui/material";
+import { GreetingWindow } from "../GreetingWindow";
+import { IconButton } from "../ui/IconButton";
+import { Input } from "../ui/Input";
+import { Typography } from "../ui/Typography";
 
-import { styles } from "./styles";
 import { SendIcon } from "../icons/SendIcon";
 import { EmojiIcon } from "../icons/EmojiIcon";
 import { MessageIcon } from "../icons/MessageIcon";
-import { GreetingWindow } from "../GreetingWindow";
+
+import { SxProps } from "@mui/material";
+import { styles } from "./styles";
+
+import EmojiPicker from "emoji-picker-react";
+import { EmojiClickData } from "emoji-picker-react";
 
 export interface RequestPanelProps {
   setEnteredTextMessage: (value: React.SetStateAction<string>) => void;
@@ -35,7 +37,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
   const [emojiPickerActive, setEmojiPickerActive] = useState(false);
   const [textMessage, setTextMessage] = useState("");
   const [greetingWindow, setGreetingWindow] = useState(false);
-  const [counter, setCounter] = useState(6);
+  const [counter, setCounter] = useState(30);
 
   const emojiPickHandler = useCallback(
     (emojiData: EmojiClickData) => {
@@ -50,7 +52,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
     }
     if (messageWidgetOpen) {
       setGreetingWindow(false);
-      setCounter(6);
+      setCounter(30);
     }
     if (counter === 0) {
       setGreetingWindow(true);
