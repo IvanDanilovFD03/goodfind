@@ -68,6 +68,7 @@ export const styles: SxStyles = {
     height: 60,
     width: 155,
     position: "fixed",
+    zIndex: 10000,
     bottom: 40,
     display: "flex",
     alignItems: "center",
