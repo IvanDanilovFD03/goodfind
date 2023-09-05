@@ -1,10 +1,12 @@
 import { FC } from "react";
+
 import { Box } from "../ui/Box";
+import { IconButton } from "../ui/IconButton";
 import { Typography } from "../ui/Typography";
 
-import { styles } from "./styles";
-import { IconButton } from "../ui/IconButton";
 import { CloseCircleIcon } from "../icons/CloseCircleIcon";
+
+import { styles } from "./styles";
 
 export interface MessageWidgetProps {
   title: string;

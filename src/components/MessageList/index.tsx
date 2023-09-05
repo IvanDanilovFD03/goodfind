@@ -1,11 +1,14 @@
 import { FC, ReactNode } from "react";
+
 import { List } from "../ui/List";
 import { ListItem } from "../ui/ListItem";
-import { v4 as uuidv4 } from "uuid";
+import { Message } from "../Message";
 
 import { styles } from "./styles";
-import { Message } from "../Message";
+
 import { Message as MessageProps } from "../../types/api";
+
+import { v4 as uuidv4 } from "uuid";
 
 export interface MessageListProps {
   messages: MessageProps[];

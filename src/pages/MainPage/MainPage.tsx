@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useState } from "react";
 
 import { MainPageView } from "../MainPageView/MainPageView";
+
 import { Message } from "../../types/api";
 import { v4 as uuidv4 } from "uuid";
 import Cookies from "js-cookie";
@@ -15,11 +16,6 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
   const [greeting, setGreeting] = useState("");
-
-  // http://localhost:3000/?authorization_token=3|1HyGQZJmgrIsrMwnYXcQvNJWycjbvn74vgwLFRuw&website_id=9
-  // const windowLink = new URL(window.location.href);
-  // const authorizationToken = windowLink.searchParams.get("authorization_token");
-  // const websiteId = windowLink.searchParams.get("website_id");
 
   const createSessionToken = useCallback(() => {
     const getCookies = Cookies.get("session_token");

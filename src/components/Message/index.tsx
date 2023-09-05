@@ -1,11 +1,17 @@
 import { FC } from "react";
+
 import { Avatar } from "../ui/Avatar";
 import { Box } from "../ui/Box";
-import { styles } from "./styles";
 import { Typography } from "../ui/Typography";
+
 import { MessageIcon } from "../icons/MessageIcon";
+
 import { Message as MessageApi } from "../../types/api";
+
 import { MessageCard } from "../MessageCard";
+
+import { styles } from "./styles";
+
 
 export interface MessageProps {
   messageContent: MessageApi;

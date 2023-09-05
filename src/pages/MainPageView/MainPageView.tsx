@@ -1,10 +1,12 @@
 import { FC, useState, useEffect } from "react";
 
-import { styles } from "./styles";
 import { Box } from "../../components/ui/Box";
 import { MessageWidget } from "../../components/MessageWidget";
 import { RequestPanel } from "../../components/RequestPanel";
+
 import { Message } from "../../types/api";
+
+import { styles } from "./styles";
 
 interface MainPageViewProps {
   messages: Message[];

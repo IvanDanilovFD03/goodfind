@@ -1,9 +1,12 @@
 import { FC } from "react";
+
 import { Box } from "../ui/Box";
-import { styles } from "./styles";
 import { Header } from "../Header";
 import { MessageList } from "../MessageList";
+
 import { Message } from "../../types/api";
+
+import { styles } from "./styles";
 
 export interface MessageWidgetProps {
   widgetTitle: string;
