@@ -9,7 +9,7 @@ interface AppProps {
   websiteId: string;
 }
 
-const App: FC<AppProps> = ({authorizationToken, websiteId}) => {
+const App: FC<AppProps> = ({ authorizationToken, websiteId }) => {
   return (
     <Box>
       <ThemeProvider theme={theme}>
