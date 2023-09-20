@@ -19,7 +19,7 @@ export const Header: FC<MessageWidgetProps> = ({
 }) => {
   return (
     <Box sx={styles.root}>
-      <Typography variant="h3" color="custom.white">
+      <Typography variant="textMessage" color="custom.white">
         {title}
       </Typography>
       <IconButton onClick={() => setMessageWidgetOpen(false)}>

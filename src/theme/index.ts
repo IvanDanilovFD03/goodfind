@@ -43,11 +43,6 @@ export const basicTheme = createTheme({
       fontWeight: 700,
       fontSize: "10px",
     },
-    h3: {
-      fontFamily: InterFontFamily,
-      fontWeight: 400,
-      fontSize: "12px",
-    },
     textMessage: {
       fontFamily: InterFontFamily,
       fontWeight: 400,
