@@ -31,9 +31,23 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
       {text === "loadingAnswer" && <Box sx={styles.loadingAnswer}></Box>}
       <CardContent sx={styles.cardContent}>
         {text === "loadingAnswer" ? (
-          <Box sx={styles.loadingAnswer}></Box>
+          <Box sx={styles.loadingAnswer}>
+            <Box sx={styles.loadingAnswerTextContainer}>
+              <Box sx={styles.loadingAnswerText}>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+              </Box>
+            </Box>
+            <Box sx={styles.loadingAnswerImageContainer}>
+              <Box sx={styles.loadingAnswerImage}></Box>
+            </Box>
+          </Box>
         ) : (
-          <Typography variant="textMessage">{text}</Typography>
+          <Typography variant="textMessage" sx={styles.text}>
+            {text}
+          </Typography>
         )}
         {products && (
           <Box sx={styles.listContainer}>
