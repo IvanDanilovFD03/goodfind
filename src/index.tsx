@@ -13,10 +13,11 @@ widgetDivs.forEach((div) => {
     ? divHTML.dataset.authorizationtoken
     : "";
   const websiteId = divHTML.dataset.websiteid ? divHTML.dataset.websiteid : "";
+  const gtmId = divHTML.dataset.gtmId ? divHTML.dataset.gtmId : ""
   
   root.render(
     <React.StrictMode>
-      <App authorizationToken={authorizationToken} websiteId={websiteId} />
+      <App authorizationToken={authorizationToken} websiteId={websiteId} gtmId={gtmId}/>
     </React.StrictMode>
   );
 });
