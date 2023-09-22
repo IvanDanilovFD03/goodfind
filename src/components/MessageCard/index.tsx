@@ -13,42 +13,33 @@ import { styles } from "./styles";
 
 export interface MessageCardProps {
   text: string;
-  products?: {
-    id: string | number;
-    title: string;
-    image: string | null;
-    short_description: string;
-    meta: {
-      price: string;
-      product_url: string;
-    };
-  }[];
+  products?:
+    | {
+        id: string | number;
+        title: string;
+        image: string | null;
+        short_description: string;
+        meta: {
+          price: string;
+          product_url: string;
+        };
+      }[]
+    | "loadingProducts";
 }
 
 export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
-  return (
-    <Card sx={styles.root}>
-      {text === "loadingAnswer" && <Box sx={styles.loadingAnswer}></Box>}
-      <CardContent sx={styles.cardContent}>
-        {text === "loadingAnswer" ? (
-          <Box sx={styles.loadingAnswer}>
-            <Box sx={styles.loadingAnswerTextContainer}>
-              <Box sx={styles.loadingAnswerText}>
-                <Box sx={styles.loadingAnswerTextItem}></Box>
-                <Box sx={styles.loadingAnswerTextItem}></Box>
-                <Box sx={styles.loadingAnswerTextItem}></Box>
-                <Box sx={styles.loadingAnswerTextItem}></Box>
-              </Box>
-            </Box>
-            <Box sx={styles.loadingAnswerImageContainer}>
-              <Box sx={styles.loadingAnswerImage}></Box>
-            </Box>
+  const productList = () => {
+    if (products === "loadingProducts") {
+      return (
+        <Box sx={styles.loadingAnswer}>
+          <Box sx={styles.loadingAnswerImageContainer}>
+            <Box sx={styles.loadingAnswerImage}></Box>
           </Box>
-        ) : (
-          <Typography variant="textMessage" sx={styles.text}>
-            {text}
-          </Typography>
-        )}
+        </Box>
+      );
+    }
+    return (
+      <>
         {products && (
           <Box sx={styles.listContainer}>
             <Typography variant="textMessage">
@@ -76,6 +67,30 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
             </List>
           </Box>
         )}
+      </>
+    );
+  };
+
+  return (
+    <Card sx={styles.root}>
+      <CardContent sx={styles.cardContent}>
+        {text === "loadingAnswer" ? (
+          <Box sx={styles.loadingAnswer}>
+            <Box sx={styles.loadingAnswerTextContainer}>
+              <Box sx={styles.loadingAnswerText}>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+                <Box sx={styles.loadingAnswerTextItem}></Box>
+              </Box>
+            </Box>
+          </Box>
+        ) : (
+          <Typography variant="textMessage" sx={styles.text}>
+            {text}
+          </Typography>
+        )}
+        {productList()}
       </CardContent>
     </Card>
   );
