@@ -17,6 +17,8 @@ import { styles } from "./styles";
 import EmojiPicker from "emoji-picker-react";
 import { EmojiClickData } from "emoji-picker-react";
 
+import TagManager from "react-gtm-module";
+
 export interface RequestPanelProps {
   setEnteredTextMessage: (value: React.SetStateAction<string>) => void;
   activeSendRequest: boolean;
@@ -68,6 +70,11 @@ export const RequestPanel: FC<RequestPanelProps> = ({
       setEnteredTextMessage(textMessage);
       setActiveSendRequest(true);
       setTextMessage("");
+      TagManager.dataLayer({
+        dataLayer: {
+          event: "question_asked",
+        },
+      });
     }
   };
 
@@ -88,7 +95,10 @@ export const RequestPanel: FC<RequestPanelProps> = ({
         <Box sx={styles.root}>
           {greetingWindow && (
             <Box sx={styles.greetingMessage}>
-              <GreetingWindow greeting={greeting} setGreetingWindow={setGreetingWindow}/>
+              <GreetingWindow
+                greeting={greeting}
+                setGreetingWindow={setGreetingWindow}
+              />
             </Box>
           )}
           <Box sx={styles.input}>
@@ -126,6 +136,11 @@ export const RequestPanel: FC<RequestPanelProps> = ({
               setEnteredTextMessage(textMessage);
               setActiveSendRequest(true);
               setTextMessage("");
+              TagManager.dataLayer({
+                dataLayer: {
+                  event: "question_asked",
+                },
+              });
             }}
             disabled={activeSendRequest}
           >
