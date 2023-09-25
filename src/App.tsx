@@ -14,6 +14,12 @@ interface AppProps {
 const App: FC<AppProps> = ({ authorizationToken, websiteId, gtmId }) => {
   const tagManagerArgs = {
     gtmId: gtmId,
+    events: {
+      "chat_opened": "chat_opened",
+      "chat_closed": "chat_closed",
+      "question_asked": "question_asked",
+      "link_tapped": "link_tapped",
+    },
   };
   TagManager.initialize(tagManagerArgs);
 
