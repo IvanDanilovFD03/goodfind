@@ -13,7 +13,7 @@ widgetDivs.forEach((div) => {
     ? divHTML.dataset.authorizationtoken
     : "";
   const websiteId = divHTML.dataset.websiteid ? divHTML.dataset.websiteid : "";
-  const gtmId = divHTML.dataset.gtmId ? divHTML.dataset.gtmId : ""
+  const gtmId = divHTML.dataset.gtmid ? divHTML.dataset.gtmid : "" 
   
   root.render(
     <React.StrictMode>
