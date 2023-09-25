@@ -28,7 +28,7 @@ export const MessageCardTitle: FC<MessageCardTitleProps> = ({
             onClick={() =>
               TagManager.dataLayer({
                 dataLayer: {
-                  event: "question_asked",
+                  event: "link_tapped",
                 },
               })
             }
