@@ -37,10 +37,12 @@ export const MessageCardTitle: FC<MessageCardTitleProps> = ({
               {text}
             </Typography>
           </Link>
-          <Typography variant="textMessage" component="span">
-            {" "}
-            ${price}
-          </Typography>
+          {price && (
+            <Typography variant="textMessage" component="span">
+              {" "}
+              ${price}
+            </Typography>
+          )}
         </Typography>
       ) : (
         <Typography variant="textMessage" sx={styles.title}>
