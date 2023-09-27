@@ -53,7 +53,7 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
                     <MessageCardTitle
                       text={title}
                       product_url={meta.product_url}
-                      price={meta.price}
+                      price={parseFloat(meta.price).toFixed(2)}
                     />
                   </Box>
                   <Typography variant="textMessage">
