@@ -8,8 +8,6 @@ import { CloseCircleIcon } from "../icons/CloseCircleIcon";
 
 import { styles } from "./styles";
 
-import TagManager from "react-gtm-module";
-
 export interface MessageWidgetProps {
   title: string;
   setMessageWidgetOpen: (value: React.SetStateAction<boolean>) => void;
@@ -27,10 +25,8 @@ export const Header: FC<MessageWidgetProps> = ({
       <IconButton
         onClick={() => {
           setMessageWidgetOpen(false);
-          TagManager.dataLayer({
-            dataLayer: {
-              event: "chat_closed",
-            },
+          gtag("event", "chat_closed", {
+            close: true,
           });
         }}
       >

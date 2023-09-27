@@ -5,8 +5,6 @@ import { Typography } from "../ui/Typography";
 
 import { styles } from "./styles";
 
-import TagManager from "react-gtm-module";
-
 export interface MessageCardTitleProps {
   text: string;
   price?: string;
@@ -26,10 +24,8 @@ export const MessageCardTitle: FC<MessageCardTitleProps> = ({
             href={product_url}
             target="_blank"
             onClick={() =>
-              TagManager.dataLayer({
-                dataLayer: {
-                  event: "link_tapped",
-                },
+              gtag("event", "link_tapped", {
+                tap: true,
               })
             }
           >

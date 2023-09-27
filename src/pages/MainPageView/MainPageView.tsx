@@ -8,8 +8,6 @@ import { Message } from "../../types/api";
 
 import { styles } from "./styles";
 
-import TagManager from "react-gtm-module";
-
 interface MainPageViewProps {
   messages: Message[];
   setEnteredTextMessage: (value: React.SetStateAction<string>) => void;
@@ -35,12 +33,9 @@ export const MainPageView: FC<MainPageViewProps> = ({
         });
     }
     if (messageWidgetOpen) {
-      const args = {
-        dataLayer: {
-          event: "chat_opened",
-        },
-      };
-      TagManager.dataLayer(args);
+      gtag("event", "chat_opened", {
+        open: true,
+      });      
     }
   }, [messageWidgetOpen]);
 
