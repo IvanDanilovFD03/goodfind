@@ -1,3 +1,9 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
 /*!
  * Pusher JavaScript Library v7.0.6
  * https://pusher.com/
