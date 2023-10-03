@@ -42,9 +42,6 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
       <>
         {products && (
           <Box sx={styles.listContainer}>
-            <Typography variant="textMessage">
-              So here is the recommended shopping list for you:
-            </Typography>
             <List sx={styles.list}>
               {products.map(({ id, title, image, short_description, meta }) => (
                 <ListItem key={id} sx={styles.listItem}>
