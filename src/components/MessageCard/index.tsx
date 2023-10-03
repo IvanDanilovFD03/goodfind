@@ -45,20 +45,19 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
             <List sx={styles.list}>
               {products.map(({ id, title, image, short_description, meta }) => (
                 <ListItem key={id} sx={styles.listItem}>
-                  <Box sx={styles.listItemTitleContainer}>
-                    <Box sx={styles.listItemCircle}></Box>
+                  {image && (
+                    <CardMedia sx={styles.img} src={image} component="img" />
+                  )}
+                  <Box sx={styles.listItemDescription}>
                     <MessageCardTitle
                       text={title}
                       product_url={meta.product_url}
                       price={parseFloat(meta.price).toFixed(2)}
                     />
+                    <Typography variant="textMessage">
+                      {short_description}
+                    </Typography>
                   </Box>
-                  <Typography variant="textMessage">
-                    {short_description}
-                  </Typography>
-                  {image && (
-                    <CardMedia sx={styles.img} src={image} component="img" />
-                  )}
                 </ListItem>
               ))}
             </List>

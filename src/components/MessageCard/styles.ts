@@ -21,24 +21,25 @@ export const styles: SxStyles = {
     mt: 1,
   },
   list: {
-    mt: 1,
+    mt: 4,
     p: 0,
     display: "flex",
     flexDirection: "column",
-    rowGap: 3,
+    rowGap: 4,
   },
   listItem: {
     p: 0,
     display: "flex",
-    flexDirection: "column",
     alignItems: "start",
-    rowGap: 1,
+    columnGap: "10px",
   },
   listItemTitle: {
     textDecoration: "underline",
   },
-  listItemTitleContainer: {
-    position: "relative",
+  listItemDescription: {
+    display: "flex",
+    flexDirection: "column",
+    rowGap: 1,
   },
   listItemCircle: {
     width: 4,
@@ -52,7 +53,6 @@ export const styles: SxStyles = {
   img: {
     width: 100,
     height: 100,
-    borderRadius: 4,
   },
   loadingAnswer: {
     width: "100%",
