@@ -41,7 +41,7 @@ export const styles: SxStyles = {
     justifyContent: "space-between",
   },
   inputBase: {
-    width: "90%",
+    width: "100%",
     color: "custom.white",
     input: {
       px: 4,
@@ -49,6 +49,9 @@ export const styles: SxStyles = {
     },
     "&:after": {
       borderBottom: "none",
+    },
+    [basicTheme.breakpoints.up("tablet")]: {
+      width: "90%",
     },
   },
   sendButtonIcon: {
@@ -99,6 +102,6 @@ export const styles: SxStyles = {
     position: "absolute",
     width: "100%",
     top: -109,
-    right: 0
+    right: 0,
   },
 };

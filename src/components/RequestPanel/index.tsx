@@ -13,9 +13,12 @@ import { MessageIcon } from "../icons/MessageIcon";
 
 import { SxProps } from "@mui/material";
 import { styles } from "./styles";
+import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 
 import EmojiPicker from "emoji-picker-react";
 import { EmojiClickData } from "emoji-picker-react";
+
+import { useBreakpoints } from "../../hooks/useBreakpoints";
 
 export interface RequestPanelProps {
   setEnteredTextMessage: (value: React.SetStateAction<string>) => void;
@@ -38,6 +41,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
   const [textMessage, setTextMessage] = useState("");
   const [greetingWindow, setGreetingWindow] = useState(false);
   const [counter, setCounter] = useState(30);
+  const { isUpTablet } = useBreakpoints();
 
   const emojiPickHandler = useCallback(
     (emojiData: EmojiClickData) => {
@@ -106,22 +110,28 @@ export const RequestPanel: FC<RequestPanelProps> = ({
               onKeyDown={(event) => textEnterHandler(event)}
               disabled={activeSendRequest}
             />
-            <IconButton
-              sx={styles.emojiButton}
-              onClick={() => setEmojiPickerActive(!emojiPickerActive)}
-            >
-              <EmojiIcon size="md" />
-            </IconButton>
+            {isUpTablet && (
+              <IconButton
+                sx={styles.emojiButton}
+                onClick={() => setEmojiPickerActive(!emojiPickerActive)}
+              >
+                <EmojiIcon size="md" />
+              </IconButton>
+            )}
             {emojiPickerActive && (
-              <Box sx={styles.emojiPicker}>
-                <EmojiPicker
-                  width={300}
-                  height={350}
-                  onEmojiClick={(emojiData: EmojiClickData) =>
-                    emojiPickHandler(emojiData)
-                  }
-                />
-              </Box>
+              <ClickAwayListener
+                onClickAway={() => setEmojiPickerActive(false)}
+              >
+                <Box sx={styles.emojiPicker}>
+                  <EmojiPicker
+                    width={300}
+                    height={350}
+                    onEmojiClick={(emojiData: EmojiClickData) =>
+                      emojiPickHandler(emojiData)
+                    }
+                  />
+                </Box>
+              </ClickAwayListener>
             )}
           </Box>
           <IconButton
