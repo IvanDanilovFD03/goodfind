@@ -52,6 +52,9 @@ export const styles: SxStyles = {
       "&::placeholder": {
         fontFamily: "DrukWideBold",
       },
+      "::-webkit-scrollbar": {
+        display: "none",
+      },
     },
     "&:after": {
       borderBottom: "none",
