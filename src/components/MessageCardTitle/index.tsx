@@ -24,9 +24,7 @@ export const MessageCardTitle: FC<MessageCardTitleProps> = ({
             href={product_url}
             target="_blank"
             onClick={() =>
-              gtag("event", "link_tapped", {
-                tap: true,
-              })
+              window._paq.push(["trackEvent", "Link tapped", "Tapped"])
             }
           >
             <Typography

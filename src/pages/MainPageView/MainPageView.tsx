@@ -33,9 +33,7 @@ export const MainPageView: FC<MainPageViewProps> = ({
         });
     }
     if (messageWidgetOpen) {
-      gtag("event", "chat_opened", {
-        open: true,
-      });      
+      window._paq.push(["trackEvent", "Open Widget", "Open"]);
     }
   }, [messageWidgetOpen]);
 

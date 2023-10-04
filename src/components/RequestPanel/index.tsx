@@ -73,9 +73,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
       setEnteredTextMessage(textMessage);
       setActiveSendRequest(true);
       setTextMessage("");
-      gtag("event", "question_asked", {
-        ask: true,
-      });
+      window._paq.push(["trackEvent", "Question asked", "Asked"]);
     }
   };
 
@@ -149,9 +147,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
               setEnteredTextMessage(textMessage);
               setActiveSendRequest(true);
               setTextMessage("");
-              gtag("event", "question_asked", {
-                ask: true,
-              });
+              window._paq.push(["trackEvent", "Question asked", "Asked"]);
             }}
             disabled={activeSendRequest || activeButton}
           >

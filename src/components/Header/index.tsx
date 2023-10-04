@@ -25,9 +25,7 @@ export const Header: FC<MessageWidgetProps> = ({
       <IconButton
         onClick={() => {
           setMessageWidgetOpen(false);
-          gtag("event", "chat_closed", {
-            close: true,
-          });
+          window._paq.push(["trackEvent", "Chat closed", "Closed"]);
         }}
       >
         <CloseCircleIcon size="md" />
