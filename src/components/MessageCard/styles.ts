@@ -51,7 +51,9 @@ export const styles: SxStyles = {
     borderRadius: "50%",
   },
   img: {
+    minWidth: 100,
     width: 100,
+    minHeight: 100,
     height: 100,
   },
   loadingAnswer: {
