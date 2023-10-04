@@ -41,6 +41,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
   const [textMessage, setTextMessage] = useState("");
   const [greetingWindow, setGreetingWindow] = useState(false);
   const [counter, setCounter] = useState(30);
+  const [activeButton, setActiveButton] = useState(false);
   const { isUpTablet } = useBreakpoints();
 
   const emojiPickHandler = useCallback(
@@ -86,8 +87,11 @@ export const RequestPanel: FC<RequestPanelProps> = ({
   useEffect(() => {
     if (textMessage === "") {
       setEnteredTextMessage(textMessage);
+      setActiveButton(true);
+    } else {
+      setActiveButton(false);
     }
-  }, [setEnteredTextMessage, textMessage]);
+  }, [setEnteredTextMessage, textMessage, setActiveButton]);
 
   return (
     <Box>
@@ -109,6 +113,9 @@ export const RequestPanel: FC<RequestPanelProps> = ({
               value={textMessage}
               onKeyDown={(event) => textEnterHandler(event)}
               disabled={activeSendRequest}
+              minRows={0}
+              maxRows={1}
+              multiline
             />
             {isUpTablet && (
               <IconButton
@@ -135,7 +142,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
             )}
           </Box>
           <IconButton
-            sx={activeButtonStyles(activeSendRequest)}
+            sx={activeButtonStyles(activeSendRequest || activeButton)}
             onClick={() => {
               setGreetingWindow(false);
               setMessageWidgetOpen(true);
@@ -146,7 +153,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
                 ask: true,
               });
             }}
-            disabled={activeSendRequest}
+            disabled={activeSendRequest || activeButton}
           >
             <SendIcon size="md" sx={styles.sendButtonIcon} />
           </IconButton>

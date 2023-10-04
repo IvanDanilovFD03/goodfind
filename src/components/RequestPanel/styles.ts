@@ -43,9 +43,15 @@ export const styles: SxStyles = {
   inputBase: {
     width: "100%",
     color: "custom.white",
-    input: {
-      px: 4,
+    fontSize: 12,
+    textarea: {
+      height: "24px",
       py: 2,
+      px: 4,
+      fontFamily: "Inter",
+      "&::placeholder": {
+        fontFamily: "DrukWideBold",
+      },
     },
     "&:after": {
       borderBottom: "none",
