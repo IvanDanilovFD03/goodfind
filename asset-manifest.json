@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/goodfind/static/css/main.0bae2c27.css",
-    "main.js": "/goodfind/static/js/main.1793f365.js",
+    "main.js": "/goodfind/static/js/main.ee5425a8.js",
     "index.html": "/goodfind/index.html",
     "main.0bae2c27.css.map": "/goodfind/static/css/main.0bae2c27.css.map",
-    "main.1793f365.js.map": "/goodfind/static/js/main.1793f365.js.map"
+    "main.ee5425a8.js.map": "/goodfind/static/js/main.ee5425a8.js.map"
   },
   "entrypoints": [
     "static/css/main.0bae2c27.css",
-    "static/js/main.1793f365.js"
+    "static/js/main.ee5425a8.js"
   ]
 }
