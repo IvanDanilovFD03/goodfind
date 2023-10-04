@@ -45,7 +45,7 @@ export const GreetingWindow: FC<GreetingWindowProps> = ({
       <Box sx={styles.text}>
         <Typography
           color="custom.white"
-          variant="textMessage"
+          variant="h1"
           sx={styles.textMessage}
           ref={el}
         ></Typography>
