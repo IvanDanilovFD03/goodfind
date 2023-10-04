@@ -4,51 +4,26 @@ import { MainPageView } from "../MainPageView/MainPageView";
 
 import { Message, Product } from "../../types/api";
 
-import { v4 as uuidv4 } from "uuid";
-import Cookies from "js-cookie";
 import Echo from "laravel-echo";
 
 interface MainPageProps {
   authorizationToken: string;
   websiteId: string;
+  sessionToken: string;
 }
 
 const Pusher = require("pusher-js");
 
-const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
+const MainPage: FC<MainPageProps> = ({
+  authorizationToken,
+  websiteId,
+  sessionToken,
+}) => {
   const [enteredTextMessage, setEnteredTextMessage] = useState("");
   const [activeSendRequest, setActiveSendRequest] = useState(false);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
   const [greeting, setGreeting] = useState("");
   const [websocketProducts, setWebsocketProducts] = useState<Product[]>([]);
-
-  const createSessionToken = useCallback(() => {
-    const getCookies = Cookies.get("session_token");
-    if (getCookies) {
-      const tokensArray = getCookies.split("|");
-      const tokenFromCookies =
-        tokensArray.length !== 0 &&
-        tokensArray.find((element) => {
-          const matchResult = element.match(/website_id_(\d+)/);
-          return matchResult && matchResult[1] === websiteId;
-        });
-      if (tokenFromCookies) {
-        return tokenFromCookies;
-      } else {
-        const token = uuidv4();
-        const fullToken = `${token}-website_id_${websiteId}`;
-        Cookies.set("session_token", `${getCookies}|${fullToken}`, {
-          expires: 7,
-        });
-        return fullToken;
-      }
-    }
-    const token = uuidv4();
-    Cookies.set("session_token", `${token}-website_id_${websiteId}`, {
-      expires: 7,
-    });
-    return token;
-  }, [websiteId]);
 
   const scrollMessageList = () => {
     if (document.getElementById("messagesList")) {
@@ -68,11 +43,11 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
       disableStats: true,
     });
     echo
-      .channel(createSessionToken())
+      .channel(sessionToken)
       .listen("ProductsFound", (response: { products: Product[] }) => {
         setWebsocketProducts(response.products);
       });
-  }, [messageHistory, createSessionToken]);
+  }, [messageHistory, sessionToken]);
 
   const sendRequest = useCallback(async () => {
     messageHistory.unshift({ role: 1, content: enteredTextMessage });
@@ -91,7 +66,7 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
             Authorization: `Bearer ${authorizationToken}`,
           },
           body: JSON.stringify({
-            session_token: createSessionToken(),
+            session_token: sessionToken,
             content: enteredTextMessage,
           }),
         }
@@ -116,7 +91,7 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
     authorizationToken,
     websiteId,
     messageHistory,
-    createSessionToken,
+    sessionToken,
   ]);
 
   useEffect(() => {
@@ -139,7 +114,7 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
   const getHistory = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search/history?session_token=${createSessionToken()}`,
+        `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search/history?session_token=${sessionToken}`,
         {
           method: "GET",
           headers: {
@@ -160,7 +135,7 @@ const MainPage: FC<MainPageProps> = ({ authorizationToken, websiteId }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [authorizationToken, websiteId, createSessionToken, greeting]);  
+  }, [authorizationToken, websiteId, sessionToken, greeting]);
 
   const getGreeting = useCallback(async () => {
     try {
