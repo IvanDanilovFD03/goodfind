@@ -9,10 +9,9 @@ import Cookies from "js-cookie";
 interface AppProps {
   authorizationToken: string;
   websiteId: string;
-  gtmId: string;
 }
 
-const App: FC<AppProps> = ({ authorizationToken, websiteId, gtmId }) => {
+const App: FC<AppProps> = ({ authorizationToken, websiteId }) => {
   const [access, setAccess] = useState<boolean>();
   const [sessionToken, setSessionToken] = useState("");
 

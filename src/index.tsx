@@ -19,32 +19,34 @@ widgetDivs.forEach((div) => {
     ? divHTML.dataset.authorizationtoken
     : "";
   const websiteId = divHTML.dataset.websiteid ? divHTML.dataset.websiteid : "";
-  const gtmId = divHTML.dataset.gtmid ? divHTML.dataset.gtmid : "";
+  const matomoWebsiteId = divHTML.dataset.matomowebsiteid
+    ? divHTML.dataset.matomowebsiteid
+    : "";
+  const matomoWebsiteName = divHTML.dataset.matomowebsitename
+    ? divHTML.dataset.matomowebsitename
+    : "";
 
   root.render(
     <>
       <Helmet>
         <script>
           {`
-            var _paq = window._paq = window._paq || [];
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-              var u="https://dev-goodfind.matomo.cloud/";
-              _paq.push(['setTrackerUrl', u+'matomo.php']);
-              _paq.push(['setSiteId', '1']);
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.async=true; g.src='//cdn.matomo.cloud/dev-goodfind.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
+          var _paq = window._paq = window._paq || [];
+          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+          _paq.push(["setExcludedQueryParams", ["_kx","a_aid"]]);
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="https://${matomoWebsiteName}.matomo.cloud/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '${matomoWebsiteId}']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src='//cdn.matomo.cloud/${matomoWebsiteName}.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+          })();
         `}
         </script>
       </Helmet>
-      <App
-        authorizationToken={authorizationToken}
-        websiteId={websiteId}
-        gtmId={gtmId}
-      />
+      <App authorizationToken={authorizationToken} websiteId={websiteId} />
     </>
   );
 });
