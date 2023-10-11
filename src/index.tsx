@@ -25,6 +25,9 @@ widgetDivs.forEach((div) => {
   const matomoWebsiteName = divHTML.dataset.matomowebsitename
     ? divHTML.dataset.matomowebsitename
     : "";
+  const visibilityTesting = divHTML.dataset.visibilitytesting
+    ? JSON.parse(divHTML.dataset.visibilitytesting)
+    : false; 
 
   root.render(
     <>
@@ -46,7 +49,11 @@ widgetDivs.forEach((div) => {
         `}
         </script>
       </Helmet>
-      <App authorizationToken={authorizationToken} websiteId={websiteId} />
+      <App
+        authorizationToken={authorizationToken}
+        websiteId={websiteId}
+        visibilityTesting={visibilityTesting}
+      />
     </>
   );
 });

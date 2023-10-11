@@ -9,9 +9,14 @@ import Cookies from "js-cookie";
 interface AppProps {
   authorizationToken: string;
   websiteId: string;
+  visibilityTesting: boolean;
 }
 
-const App: FC<AppProps> = ({ authorizationToken, websiteId }) => {
+const App: FC<AppProps> = ({
+  authorizationToken,
+  websiteId,
+  visibilityTesting,
+}) => {
   const [access, setAccess] = useState<boolean>();
   const [sessionToken, setSessionToken] = useState("");
 
@@ -67,8 +72,14 @@ const App: FC<AppProps> = ({ authorizationToken, websiteId }) => {
 
   useEffect(() => {
     setSessionToken(createSessionToken());
-    getAccess();
-  }, [getAccess, createSessionToken]);
+    if (visibilityTesting) {
+      getAccess();
+    } else {
+      setAccess(true);
+    }
+  }, [getAccess, createSessionToken, visibilityTesting]);
+
+  console.log("access ", access);
 
   if (access) {
     return (
