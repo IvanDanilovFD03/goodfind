@@ -48,6 +48,11 @@ export const basicTheme = createTheme({
       fontWeight: 400,
       fontSize: "12px",
     },
+    textMessageBold: {
+      fontFamily: InterFontFamily,
+      fontWeight: 700,
+      fontSize: "12px",
+    },
     textInfo: {
       fontFamily: PoppinsFontFamily,
       fontWeight: 400,
@@ -87,6 +92,7 @@ export const theme = createTheme(
             textSmall: "p",
             textMessage: "p",
             textInfoBold: "p",
+            textMessageBold: "p",
           },
         },
       },
@@ -120,13 +126,6 @@ export const theme = createTheme(
       MuiLink: {
         styleOverrides: {
           root: {
-            textDecoration: "none",
-            color: "inherit",
-            "&:hover": {
-              textDecoration: "underline",
-              textUnderlinePosition: "under",
-              color: "inherit",
-            },
             "&:disabled": {
               color: "grayLight",
             },
