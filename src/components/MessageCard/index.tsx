@@ -1,14 +1,15 @@
 import { FC } from "react";
 
+import { MessageCardTitle } from "../MessageCardTitle";
 import { Box } from "../ui/Box";
 import { Card } from "../ui/Card";
 import { CardContent } from "../ui/CardContent";
 import { CardMedia } from "../ui/CardMedia";
 import { List } from "../ui/List";
 import { ListItem } from "../ui/ListItem";
-import { MessageCardTitle } from "../MessageCardTitle";
 import { Typography } from "../ui/Typography";
 
+import { Link } from "../ui/Link";
 import { styles } from "./styles";
 
 export interface MessageCardProps {
@@ -46,7 +47,21 @@ export const MessageCard: FC<MessageCardProps> = ({ text, products }) => {
               {products.map(({ id, title, image, short_description, meta }) => (
                 <ListItem key={id} sx={styles.listItem}>
                   {image && (
-                    <CardMedia sx={styles.img} src={image} component="img" />
+                    <Link
+                      href={meta.product_url}
+                      target="_blank"
+                      onClick={() =>
+                        window._paq.push([
+                          "trackEvent",
+                          "Link tapped",
+                          "Tapped",
+                        ])
+                      }
+                      color="custom.black"
+                    >
+                      {" "}
+                      <CardMedia sx={styles.img} src={image} component="img" />
+                    </Link>
                   )}
                   <Box sx={styles.listItemDescription}>
                     <MessageCardTitle
