@@ -26,12 +26,9 @@ export const MessageCardTitle: FC<MessageCardTitleProps> = ({
             onClick={() =>
               window._paq.push(["trackEvent", "Link tapped", "Tapped"])
             }
+            color="custom.black"
           >
-            <Typography
-              variant="textMessage"
-              sx={styles.title}
-              component="span"
-            >
+            <Typography variant="textMessageBold" component="span">
               {text}
             </Typography>
           </Link>
