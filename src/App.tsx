@@ -79,8 +79,6 @@ const App: FC<AppProps> = ({
     }
   }, [getAccess, createSessionToken, visibilityTesting]);
 
-  console.log("access ", access);
-
   if (access) {
     return (
       <Box>
