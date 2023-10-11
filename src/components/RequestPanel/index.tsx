@@ -114,6 +114,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
               minRows={0}
               maxRows={1}
               multiline
+              autoFocus={messageWidgetOpen && textMessage === "" ? true : false}
             />
             {isUpTablet && (
               <IconButton
