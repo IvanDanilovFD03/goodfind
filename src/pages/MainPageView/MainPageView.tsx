@@ -27,10 +27,11 @@ export const MainPageView: FC<MainPageViewProps> = ({
   useEffect(() => {
     if (messageWidgetOpen && document.getElementById("messagesList")) {
       const element = document.getElementById("messagesList");
-      element &&
+      if (element) {
         element.scrollTo({
           top: element.scrollHeight,
         });
+      }
     }
     if (messageWidgetOpen) {
       window._paq.push(["trackEvent", "Open Widget", "Open"]);

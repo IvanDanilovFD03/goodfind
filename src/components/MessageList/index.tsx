@@ -25,14 +25,6 @@ export const MessageList: FC<MessageListProps> = ({ messages }) => {
 
   const messagesList = addListItem();
 
-  if (document.getElementById("messagesList")) {
-    const element = document.getElementById("messagesList");
-    element &&
-      element.scrollTo({
-        top: element.scrollHeight,
-      });
-  }
-
   return (
     <List sx={styles.root} id="messagesList">
       {messagesList.map((message) => (

@@ -28,10 +28,11 @@ const MainPage: FC<MainPageProps> = ({
   const scrollMessageList = () => {
     if (document.getElementById("messagesList")) {
       const element = document.getElementById("messagesList");
-      element &&
+      if (element) {
         element.scrollTo({
           top: element.scrollHeight,
         });
+      }
     }
   };
 
@@ -56,6 +57,9 @@ const MainPage: FC<MainPageProps> = ({
       content: "loadingAnswer",
       products: "loadingProducts",
     });
+    setTimeout(() => {
+      scrollMessageList();
+    }, 0);
     try {
       const response = await fetch(
         `https://goodfind-ai.empat.tech/api/websites/${websiteId}/search`,
@@ -98,7 +102,6 @@ const MainPage: FC<MainPageProps> = ({
     if (enteredTextMessage !== "") {
       sendRequest();
     }
-    scrollMessageList();
   }, [sendRequest, enteredTextMessage]);
 
   useEffect(() => {
