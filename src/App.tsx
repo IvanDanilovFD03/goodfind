@@ -19,6 +19,20 @@ const App: FC<AppProps> = ({
 }) => {
   const [access, setAccess] = useState<boolean>();
   const [sessionToken, setSessionToken] = useState("");
+  const [visibilityTestingUrl, setVisibilityTestingUrl] = useState<
+    string | null
+  >(null);
+
+  useEffect(() => {
+    const currentURL = window.location.href;
+    const newUrl = new URL(currentURL);
+    const hashTag = newUrl.hash;
+    const parts = hashTag.split("=");
+    if (parts.length === 2) {
+      const value = parts[1];
+      setVisibilityTestingUrl(value);
+    }
+  }, []);
 
   const createSessionToken = useCallback(() => {
     const getCookies = Cookies.get("session_token");
@@ -71,13 +85,26 @@ const App: FC<AppProps> = ({
   }, [authorizationToken, websiteId, createSessionToken]);
 
   useEffect(() => {
-    setSessionToken(createSessionToken());
-    if (visibilityTesting) {
+    setSessionToken(createSessionToken());    
+    if (visibilityTestingUrl !== null && JSON.parse(visibilityTestingUrl)) {     
       getAccess();
+      return;
+    } else if (visibilityTesting) {
+      console.log("test");
+      
+      getAccess();
+      return;
     } else {
       setAccess(true);
+      return;
     }
-  }, [getAccess, createSessionToken, visibilityTesting]);
+  }, [
+    getAccess,
+    createSessionToken,
+    visibilityTesting,
+    visibilityTestingUrl,
+    access,
+  ]);
 
   if (access) {
     return (
