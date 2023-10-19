@@ -10,29 +10,17 @@ interface AppProps {
   authorizationToken: string;
   websiteId: string;
   visibilityTesting: boolean;
+  visibilityTestingURL?: boolean;
 }
 
 const App: FC<AppProps> = ({
   authorizationToken,
   websiteId,
   visibilityTesting,
+  visibilityTestingURL,
 }) => {
   const [access, setAccess] = useState<boolean>();
   const [sessionToken, setSessionToken] = useState("");
-  const [visibilityTestingUrl, setVisibilityTestingUrl] = useState<
-    string | null
-  >(null);
-
-  useEffect(() => {
-    const currentURL = window.location.href;
-    const newUrl = new URL(currentURL);
-    const hashTag = newUrl.hash;
-    const parts = hashTag.split("=");
-    if (parts.length === 2) {
-      const value = parts[1];
-      setVisibilityTestingUrl(value);
-    }
-  }, []);
 
   const createSessionToken = useCallback(() => {
     const getCookies = Cookies.get("session_token");
@@ -85,13 +73,14 @@ const App: FC<AppProps> = ({
   }, [authorizationToken, websiteId, createSessionToken]);
 
   useEffect(() => {
-    setSessionToken(createSessionToken());    
-    if (visibilityTestingUrl !== null && JSON.parse(visibilityTestingUrl)) {     
+    setSessionToken(createSessionToken());
+    if (visibilityTestingURL) {
       getAccess();
       return;
+    } else if (visibilityTestingURL === false) {
+      setAccess(true);
+      return;
     } else if (visibilityTesting) {
-      console.log("test");
-      
       getAccess();
       return;
     } else {
@@ -102,7 +91,7 @@ const App: FC<AppProps> = ({
     getAccess,
     createSessionToken,
     visibilityTesting,
-    visibilityTestingUrl,
+    visibilityTestingURL,
     access,
   ]);
 

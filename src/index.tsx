@@ -27,7 +27,11 @@ widgetDivs.forEach((div) => {
     : "";
   const visibilityTesting = divHTML.dataset.visibilitytesting
     ? JSON.parse(divHTML.dataset.visibilitytesting)
-    : false; 
+    : false;
+
+  const currentURL = window.location.href;
+  const newUrl = new URL(currentURL);
+  const visibilityTestingURL = newUrl.hash.split("=")[1];
 
   root.render(
     <>
@@ -53,6 +57,9 @@ widgetDivs.forEach((div) => {
         authorizationToken={authorizationToken}
         websiteId={websiteId}
         visibilityTesting={visibilityTesting}
+        visibilityTestingURL={
+          visibilityTestingURL && JSON.parse(visibilityTestingURL)
+        }
       />
     </>
   );
