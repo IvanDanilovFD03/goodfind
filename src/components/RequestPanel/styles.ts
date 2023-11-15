@@ -6,6 +6,8 @@ export const styles: SxStyles = {
     zIndex: 10000,
     bgcolor: "custom.black",
     height: 60,
+    minHeight: 60,
+    maxHeight: 60,
     width: "100vw",
     position: "fixed",
     bottom: 40,
@@ -45,7 +47,8 @@ export const styles: SxStyles = {
     color: "custom.white",
     fontSize: 12,
     textarea: {
-      height: "24px",
+      height: "16px !important",
+      maxHeight: "16px !important",
       py: 2,
       px: 4,
       fontFamily: "Inter",

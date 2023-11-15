@@ -172,8 +172,11 @@ const MainPage: FC<MainPageProps> = ({
 
   useEffect(() => {
     getHistory();
+  }, [getHistory]);
+
+  useEffect(() => {
     getGreeting();
-  }, [getHistory, getGreeting]);
+  }, [getGreeting]);
 
   return (
     <MainPageView
