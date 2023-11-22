@@ -14,7 +14,7 @@ export const styles: SxStyles = {
       height: "70vh",
       top: "unset",
       bottom: 160,
-      right: 40,
+      left: 40,
       boxShadow: "20px 0px 16px 0px rgba(0, 0, 0, 0.25)",
     },
   },

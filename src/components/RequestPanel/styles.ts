@@ -20,7 +20,7 @@ export const styles: SxStyles = {
     [basicTheme.breakpoints.up("tablet")]: {
       width: 540,
       bottom: 100,
-      right: 40,
+      left: 40,
     },
   },
   sendButton: {
@@ -97,7 +97,7 @@ export const styles: SxStyles = {
     },
     [basicTheme.breakpoints.up("tablet")]: {
       bottom: 100,
-      right: 40,
+      left: 40,
     },
   },
   logoIcon: {
