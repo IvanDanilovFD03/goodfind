@@ -28,11 +28,7 @@ export const basicTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: [
-      DrukWideBoldFontFamily,
-      InterFontFamily,
-      PoppinsFontFamily,
-    ].join(","),
+    fontFamily: "inherit",
     h1: {
       fontFamily: DrukWideBoldFontFamily,
       fontWeight: 700,
@@ -133,6 +129,7 @@ export const theme = createTheme(
         },
       },
     },
+    
   },
   basicTheme
 );
