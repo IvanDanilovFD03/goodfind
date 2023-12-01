@@ -47,8 +47,12 @@ const MainPage: FC<MainPageProps> = ({
       .channel(sessionToken)
       .listen("ProductsFound", (response: { products: Product[] }) => {
         setWebsocketProducts(response.products);
-        window._paq.push(["GoodFindChat", "Products received", response.products]);
-
+        window._paq.push([
+          "trackEvent",
+          "GoodFindChat",
+          "Products received",
+          response.products,
+        ]);
       });
   }, [messageHistory, sessionToken]);
 
@@ -86,7 +90,12 @@ const MainPage: FC<MainPageProps> = ({
       }
       const responseInfo = await response.json();
       messageHistory[0].content = responseInfo.data.content;
-      window._paq.push(["GoodFindChat", "Answer received", responseInfo.data.content]);
+      window._paq.push([
+        "trackEvent",
+        "GoodFindChat",
+        "Answer received",
+        responseInfo.data.content,
+      ]);
       setActiveSendRequest(false);
     } catch (error) {
       messageHistory[0].content = "Ooops...Something went wrong!";
@@ -103,7 +112,12 @@ const MainPage: FC<MainPageProps> = ({
 
   useEffect(() => {
     if (enteredTextMessage !== "") {
-      window._paq.push(["GoodFindChat", "Question asked", enteredTextMessage]);
+      window._paq.push([
+        "trackEvent",
+        "GoodFindChat",
+        "Question asked",
+        enteredTextMessage,
+      ]);
       sendRequest();
     }
   }, [sendRequest, enteredTextMessage]);
