@@ -3,14 +3,14 @@ import { basicTheme } from "../../theme";
 
 export const styles: SxStyles = {
   root: {
-    zIndex: 10000,
+    zIndex: 10000000000,
     bgcolor: "custom.black",
     height: 60,
     minHeight: 60,
     maxHeight: 60,
     width: "100vw",
     position: "fixed",
-    bottom: 40,
+    bottom: 100,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -19,8 +19,10 @@ export const styles: SxStyles = {
     columnGap: 2,
     [basicTheme.breakpoints.up("tablet")]: {
       width: 540,
-      bottom: 100,
       left: 40,
+    },
+    [basicTheme.breakpoints.up("laptop")]: {
+      bottom: 25,
     },
   },
   sendButton: {
@@ -84,7 +86,7 @@ export const styles: SxStyles = {
     width: 155,
     position: "fixed",
     zIndex: 10000,
-    bottom: 40,
+    bottom: 100,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -96,8 +98,10 @@ export const styles: SxStyles = {
       bgcolor: "custom.black",
     },
     [basicTheme.breakpoints.up("tablet")]: {
-      bottom: 100,
       left: 40,
+    },
+    [basicTheme.breakpoints.up("laptop")]: {
+      bottom: 25,
     },
   },
   logoIcon: {
