@@ -94,7 +94,7 @@ export const RequestPanel: FC<RequestPanelProps> = ({
   return (
     <Box>
       {messageWidgetOpen || greetingWindow ? (
-        <Box sx={styles.root}>
+        <Box sx={messageWidgetOpen ? styles.root : styles.rootGreeting}>
           {greetingWindow && (
             <Box sx={styles.greetingMessage}>
               <GreetingWindow

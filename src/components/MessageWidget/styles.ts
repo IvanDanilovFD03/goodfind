@@ -17,5 +17,8 @@ export const styles: SxStyles = {
       left: 40,
       boxShadow: "20px 0px 16px 0px rgba(0, 0, 0, 0.25)",
     },
+    [basicTheme.breakpoints.up("laptop")]: {
+      bottom: 80,
+    },
   },
 };

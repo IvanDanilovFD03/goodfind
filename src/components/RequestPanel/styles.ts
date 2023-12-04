@@ -10,7 +10,7 @@ export const styles: SxStyles = {
     maxHeight: 60,
     width: "100vw",
     position: "fixed",
-    bottom: 100,
+    bottom: 40,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -18,6 +18,7 @@ export const styles: SxStyles = {
     p: "10px",
     columnGap: 2,
     [basicTheme.breakpoints.up("tablet")]: {
+      bottom: 100,
       width: 540,
       left: 40,
     },
@@ -97,7 +98,28 @@ export const styles: SxStyles = {
     "&:hover": {
       bgcolor: "custom.black",
     },
+  },
+  rootGreeting: {
+    zIndex: 10000000000,
+    bgcolor: "custom.black",
+    height: 60,
+    minHeight: 60,
+    maxHeight: 60,
+    width: "100vw",
+    position: "fixed",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "20px 0px 16px 0px rgba(0, 0, 0, 0.25)",
+    p: "10px",
+    columnGap: 2,
+    bottom: 100,
+    borderRadius: 0,
+    "&:hover": {
+      bgcolor: "custom.black",
+    },
     [basicTheme.breakpoints.up("tablet")]: {
+      width: 540,
       left: 40,
     },
     [basicTheme.breakpoints.up("laptop")]: {

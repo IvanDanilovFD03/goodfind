@@ -14,7 +14,7 @@ export const styles: SxStyles = {
   },
   text: {
     bgcolor: "custom.black",
-    height: 89,
+    height: 96,
     width: "100%",
     display: "flex",
     py: 3,
